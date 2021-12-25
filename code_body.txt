@@ -1,0 +1,36 @@
+import random
+
+number_of_people = int(input("Enter the number of friends joining (including you):"))
+print()
+
+if number_of_people <= 0:
+    print("No one is joining for the party")
+else:
+    friends_name = []
+    print("Enter the name of every friend (including you), each on a new line:")
+    print()
+    for element in range(number_of_people):
+        friends_name.append(input())
+    friends_bill = dict.fromkeys(friends_name, 0)
+    print()
+    bill = int(input("Enter the total bill value:"))
+    print()
+    lucky_feature = input('Do you want to use the "Who is lucky?" feature? Write Yes/No:')
+    if lucky_feature != "Yes":
+        print()
+        print('No one is going to be lucky')
+        fraction = round(bill / number_of_people, 2)
+        for element in friends_bill:
+            friends_bill[element] = fraction
+        print (friends_bill)
+    else:
+        lucky_person = random.choice(friends_name)
+        print()
+        print(lucky_person + ' is the lucky one!')
+        number_of_people -= 1
+        fraction = round(bill / number_of_people, 2)
+        for element in friends_bill:
+            friends_bill[element] = int(fraction)
+            friends_bill[lucky_person] = 0
+        print()
+        print (friends_bill)
